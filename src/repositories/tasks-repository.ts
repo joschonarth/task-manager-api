@@ -63,4 +63,20 @@ export class TasksRepository {
     await knex('tasks').where({ id }).delete()
     return true
   }
+
+  static async complete(id: string): Promise<Task> {
+    const data: {
+      completed_at: string
+      updated_at: string
+    } = {
+      completed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }
+
+    await knex('tasks').where({ id }).update(data)
+
+    const completedTask = await knex('tasks').where({ id }).first()
+
+    return completedTask
+  }
 }
