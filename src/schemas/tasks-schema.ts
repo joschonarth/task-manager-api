@@ -5,8 +5,14 @@ export const taskSchema = z.object({
   title: z.string().min(2),
   description: z.string().nullable(),
   completed_at: z.coerce.date().nullable(),
-  created_at: z.coerce.date(),
-  updated_at: z.coerce.date(),
+  created_at: z.preprocess(
+    (arg) => new Date(arg as number).toISOString(),
+    z.string(),
+  ),
+  updated_at: z.preprocess(
+    (arg) => new Date(arg as number).toISOString(),
+    z.string(),
+  ),
 })
 
 export type Task = z.infer<typeof taskSchema>
