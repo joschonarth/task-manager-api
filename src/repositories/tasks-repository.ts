@@ -16,7 +16,20 @@ export class TasksRepository {
     await knex('tasks').insert(taskSchema.parse(newTask))
   }
 
-  static async findAll(): Promise<Task[]> {
-    return await knex('tasks').select('*')
+  static async findAll(filters?: {
+    title?: string
+    description?: string
+  }): Promise<Task[]> {
+    let query = knex('tasks').select('*')
+
+    if (filters) {
+      if (filters.title) {
+        query = query.where('title', 'like', `%${filters.title}%`)
+      }
+      if (filters.description) {
+        query = query.where('description', 'like', `%${filters.description}%`)
+      }
+    }
+    return await query
   }
 }
