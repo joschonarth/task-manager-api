@@ -81,4 +81,18 @@ export class TasksRepository {
 
     return completedTask
   }
+
+  static async createMany(
+    tasks: Omit<Task, 'id' | 'completed_at' | 'created_at' | 'updated_at'>[],
+  ): Promise<void> {
+    const newTasks = tasks.map((task) => ({
+      id: crypto.randomUUID(),
+      completed_at: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      ...task,
+    }))
+
+    await knex('tasks').insert(newTasks.map((task) => taskSchema.parse(task)))
+  }
 }

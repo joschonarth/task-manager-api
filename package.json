@@ -18,8 +18,10 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "@fastify/multipart": "^9.0.3",
     "desafio-01": "file:",
     "dotenv": "^16.4.7",
+    "fast-csv": "^5.0.2",
     "fastify": "^5.2.1",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7",
