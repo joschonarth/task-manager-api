@@ -7,13 +7,15 @@ export class TasksRepository {
   ) {
     const newTask: Task = {
       id: crypto.randomUUID(),
+      ...task,
       completed_at: null,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
-      ...task,
     }
 
     await knex('tasks').insert(taskSchema.parse(newTask))
+
+    return newTask
   }
 
   static async findAll(filters?: {
