@@ -32,4 +32,24 @@ export class TasksRepository {
     }
     return await query
   }
+
+  static async update(
+    id: string,
+    updatedFields: { title?: string; description?: string },
+  ): Promise<Task> {
+    const updateData: {
+      title?: string
+      description?: string
+      updated_at: string
+    } = {
+      updated_at: new Date().toISOString(),
+      ...updatedFields,
+    }
+
+    await knex('tasks').where({ id }).update(updateData)
+
+    const updatedTask = await knex('tasks').where({ id }).first()
+
+    return updatedTask
+  }
 }

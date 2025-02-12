@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const taskSchema = z.object({
   id: z.string().uuid(),
   title: z.string().min(2),
-  description: z.string().nullable(),
+  description: z.string().optional(),
   completed_at: z.coerce.date().nullable(),
   created_at: z.preprocess(
     (arg) => new Date(arg as number).toISOString(),
