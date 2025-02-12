@@ -10,11 +10,14 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^22.13.1",
+    "eslint": "^8.57.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "desafio-01": "file:",
     "fastify": "^5.2.1"
   }
 }
