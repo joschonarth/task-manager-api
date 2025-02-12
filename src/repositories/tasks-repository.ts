@@ -52,4 +52,15 @@ export class TasksRepository {
 
     return updatedTask
   }
+
+  static async delete(id: string): Promise<boolean> {
+    const taskExists = await knex('tasks').where({ id }).first()
+
+    if (!taskExists) {
+      return false
+    }
+
+    await knex('tasks').where({ id }).delete()
+    return true
+  }
 }
