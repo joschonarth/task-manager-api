@@ -19,7 +19,7 @@ export async function deleteTask(
       return reply.status(404).send({ message: 'Task not found' })
     }
 
-    return reply.status(204).send()
+    return reply.status(200).send({ message: 'Task removed successfully' })
   } catch (error) {
     throw new AppError('Error deleting task')
   }
